@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+    <title>HTML5 Canvas爱心飘动动画特效</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        #div {
+            position: absolute;
+            top: 13%;
+            left: 40%;
+            text-align: center;
+            font-family: "STXingkai";
+            text-transform: uppercase; /* 全开大写 */
+            font-size: 18px;
+            color: #8FBC8F;
+            text-shadow: 0 8px 9px #F0E68C, 0px -2px 1px #fff;
+
+
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<canvas id="c">
+
+
+</canvas>
+<div id="div" style="display:none">
+    <p>TO:604<br>
+        很幸运在高中遇见你们，<br>在你们面前我可以毫无顾忌地展现自己。<br>
+        爱和温暖融化了我心中的坚冰，<br>33的阳光、佳音的细心、泽芸的知性、<br>梓瑶的温暖、佳悦的豪放，<br>每个人都很可爱，<br>
+        由此才组成了604这个团结友爱的家庭。<br>我们约定未来一年半还要一起走下去，<br>故事不会停留在22的盛夏！<br>
+        新的一年祝我们6人<br>平安顺遂，万事胜意，<br>有福同享有难同当，<br>望604永远是你心中的一处灵魂港湾。
+    </p>
+</div>
+<audio id="myaudio" src="./song.mp3" controls="controls"  loop="true" hidden="true">
+</audio>
+<script>
+    $("body").click(function () {
+        var b = document.body;
+        var c = document.getElementsByTagName('canvas')[0];
+        var a = c.getContext('2d');
+        var myAuto = document.getElementById('myaudio');
+        myAuto.play();
+
+        var M = Math, n = M.pow, i, E = 2, F = "rgba(233,61,109,", d = M.cos, z = M.sin, L = 1, u = 30, W = window,
+            w = c.width = W.innerWidth, h = c.height = W.innerHeight, r = function () {
+                return M.random() * 2 - 1
+            }, y = "px Arial", v = "", q = "♥", X = w / 2, Y = h / 2, T = 4, p = function () {
+                var e = this;
+                e.g = function () {
+                    e.x = X;
+                    e.y = Y;
+                    e.k = 0;
+                    e.l = 0;
+                    e.t = M.random() * 19000;
+                    e.c = e.t
+                };
+                e.d = function () {
+                    a.fillStyle = F + (e.c / e.t) + ")";
+                    a.fillText(q, e.x, e.y);
+                    e.c -= 50;
+                    e.x += e.k;
+                    e.y += e.l;
+                    e.k = e.k + r();
+                    e.l = e.l + r();
+                    if (e.c < 0 || e.x > w || e.x < 0 || e.y > h || e.y < 0) {
+                        e.g()
+                    }
+                };
+                e.g()
+            }, A, B;
+        a.textAlign = "center";
+        a.strokeStyle = "#000";
+        a.lineWidth = 2;
+        for (i = 0; i < 350; i++) {
+            M[i] = new p()
+        }
+        setInterval(function () {
+            a.clearRect(0, 0, w, h);
+            a.font = u + y;
+            X = (w / 6 * n(z(T), 3) + w / 2);
+            Y = 0.8 * (-h / 40 * (13 * d(T) - 5 * d(2 * T) - 2 * d(3 * T) - d(4 * T)) + h / 2.3);
+            T += (z(T) + 3) / 99;
+            for (i = 0; i < 350; i++) {
+                with (M[i]) {
+                    A = (x / w - 0.5) * 2, B = -(y / h - 0.5);
+                    if (L && (A * A + 2 * n((B - 0.5 * n(M.abs(A), 0.5)), 2)) > 0.11) {
+                        k = l = 0
+                    }
+                    d()
+                }
+            }
+            a.font = 120 + y;
+            if (E > 0.1) {
+                if (E < 1) {
+                    a.fillStyle = F + E + ")";
+                    a.fillText("", w / 2, h / 2)
+                }
+                E -= 0.02
+            }
+            a.fillStyle = "#E93D6D";
+            a.fillText(v, X, Y + u);
+            a.strokeText(v, X, Y + u)
+        }, 50);
+        b.bgColor = "#FFEFF2";
+        c.onmouseup = function () {
+            L = (L) ? 0 : 1
+        }
+        $(document).ready(function () {
+
+            $("#div").fadeIn(3000);
+        });
+
+    });
+
+
+</script>
+
+
+</body>
+</html>
